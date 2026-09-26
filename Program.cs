@@ -1,2 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using Spectre.Console;
+using trecker.func;
+using trecker.func.login;
+
+
+Menu menu = new Menu();
+
+
+menu.MostrarMenu();
+
