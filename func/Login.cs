@@ -14,6 +14,8 @@ namespace trecker.func.login
 
         public void FazerLogin()
         {
+            string username ;
+            string password ;
             var titulo =new Panel(new FigletText("TRACKER CLI BR").Centered().Color(Color.Green))
             {
                 Border = BoxBorder.Double,
@@ -23,9 +25,9 @@ namespace trecker.func.login
 
             AnsiConsole.Write(titulo);
             AnsiConsole.MarkupLine("\n [bold yellow]Digite seu nome de usuário:[/]");
-            string username = Console.ReadLine();
+             username = Console.ReadLine();
             AnsiConsole.MarkupLine("[bold yellow]Digite sua senha:[/]");
-            string password = AnsiConsole.Prompt( new TextPrompt<string>("Senha:").Secret());
+             password = AnsiConsole.Prompt( new TextPrompt<string>("Senha:").Secret());
 
             Console.Clear();
 

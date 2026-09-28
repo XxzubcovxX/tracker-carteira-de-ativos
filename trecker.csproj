@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+	  <None Update="appsettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.12" />
     <PackageReference Include="Spectre.Console" Version="0.57.2" />
   </ItemGroup>
 

@@ -4,45 +4,72 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Spectre.Console;
+using trecker.API.Publics.Brapi;
 using trecker.func.login;
 
 namespace trecker.func
 {
     internal class Menu
     {
-        public int Opcao { get; set; }
 
 
-        public int MostrarMenu()
+
+        public async Task MostrarMenu()
         {
+            while (true)
+            {
             Login login = new Login();
-
             login.FazerLogin();
 
-            AnsiConsole.MarkupLine("[bold yellow]Selecione uma opção:[/] \n");
-            AnsiConsole.MarkupLine("[bold cyan]1.[/] Adicionar tarefa");
-            AnsiConsole.MarkupLine("[bold cyan]2.[/] Listar tarefas");
-            AnsiConsole.MarkupLine("[bold cyan]3.[/] Sair");
+                bool loop = true;
+                while (loop)
+                {
+                    string opcao_escolhida = AnsiConsole.Prompt(new SelectionPrompt<string>()
+                        .Title("[bold yellow]Selecione uma opção:[/]")
+                        .PageSize(10)
+                        .AddChoices(new[]
+                        {
+                        "1. Adicionar Ativo (Compra/Venda)",
+                        "2. Ver Minha Carteira",
+                        "3. Consultar Cotação na BraPI",
+                        "4. Sair"
+                         }));
 
-            Console.Write(" \n Digite uma opção: ");
-            int opcao_escolhida = Convert.ToInt32(Console.ReadLine());
+                    switch (opcao_escolhida)
+                    {
+                        case "1. Adicionar Ativo (Compra/Venda)":
+                            AnsiConsole.MarkupLine("[bold green]Opção 1 selecionada: Adicionar Ativo (Compra/Venda)[/]");
+                            // Chame o método correspondente para adicionar ativo
+                            break;
+                        case "2. Ver Minha Carteira":
+                            AnsiConsole.MarkupLine("[bold green]Opção 2 selecionada: Ver Minha Carteira[/]");
+                            // Chame o método correspondente para ver a carteira
+                            break;
+                        case "3. Consultar Cotação na BraPI":
+                            AnsiConsole.MarkupLine("[bold green]Opção 3 selecionada: Consultar Cotação[/]");
+                            AnsiConsole.MarkupLine("[bold yellow]Digite o código do ativo que deseja consultar:[/]");
+                            string ticker = Console.ReadLine();
+                            BrapiService brapiService = new BrapiService();
+                            await brapiService.GetAtivosAsync(ticker);
+                            ContinuarAPP();
+                            break;
+                        case "4. Sair":
+                            Console.Clear();
+                            loop = false;
+                            break;
+                    }
 
-            while (opcao_escolhida < 1 || opcao_escolhida > 3)
-            {
-                Console.Clear();
-                AnsiConsole.MarkupLine("[bold red]Opção inválida! Por favor, selecione uma opção válida (1, 2 ou 3):[/] \n");
 
-                AnsiConsole.MarkupLine("[bold yellow]Selecione uma opção:[/] \n");
-                AnsiConsole.MarkupLine("[bold cyan]1.[/] Adicionar tarefa");
-                AnsiConsole.MarkupLine("[bold cyan]2.[/] Listar tarefas");
-                AnsiConsole.MarkupLine("[bold cyan]3.[/] Sair");
-
-                Console.Write(" \n Digite uma opção: ");  opcao_escolhida = Convert.ToInt32(Console.ReadLine());
+                }
 
             }
-
-            return Opcao = opcao_escolhida;
         }
-
+        private void ContinuarAPP()
+        {
+            AnsiConsole.MarkupLine("\n[bold yellow]Pressione qualquer tecla para continuar...[/]");
+            Console.ReadKey(true);
+            Console.Clear();
+        }
+        
     }
 }

@@ -6,5 +6,5 @@ using trecker.func.login;
 Menu menu = new Menu();
 
 
-menu.MostrarMenu();
+ await menu.MostrarMenu();
 
