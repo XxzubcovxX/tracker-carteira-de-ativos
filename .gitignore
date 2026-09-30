@@ -3,3 +3,6 @@ bin/
 obj/
 *.user
 appsettings.json
+trecker.db
+trecker.db-shm
+trecker.db-wal

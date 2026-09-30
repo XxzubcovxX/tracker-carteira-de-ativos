@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace trecker.API.api.DTO
 {
-    internal class UsuarioDto
+    public class LoginDTO
     {
+        public string UsuarioNome { get; set; }
+        public string Senha { get; set; }
     }
 }
